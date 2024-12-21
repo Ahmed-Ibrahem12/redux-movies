@@ -10,9 +10,11 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import ReactStars from "react-stars";
 import { getSeriesHome } from "../redux/Slices/homeSeries";
+import { useNavigate } from "react-router-dom";
 
 export default function TopSeries() {
   const { HomeSeries } = useSelector((state) => state.homeSeries);
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -47,7 +49,9 @@ export default function TopSeries() {
                 </div>
               </CardBody>
               <CardFooter className="pt-0">
-                <Button>Details</Button>
+                <Button onClick={() => navigate(`/series/${mov.id}`)}>
+                  Details
+                </Button>
               </CardFooter>
             </Card>
           )

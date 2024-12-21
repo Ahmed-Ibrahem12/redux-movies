@@ -51,18 +51,18 @@ const ShowSeries = () => {
   const handleOpen = () => setOpen(!open);
 
   useEffect(() => {
-    // setTimeout(() => {
-    dispatch(getSeriesDetails(seriesId));
-    dispatch(getSeriesCast(seriesId));
-    dispatch(getSeriesReviews(seriesId));
-    dispatch(getSeriesRecommend(seriesId));
-    dispatch(getSeriesVideos(seriesId));
-    // }, 1000);
+    setTimeout(() => {
+      dispatch(getSeriesDetails(seriesId));
+      dispatch(getSeriesCast(seriesId));
+      dispatch(getSeriesReviews(seriesId));
+      dispatch(getSeriesRecommend(seriesId));
+      dispatch(getSeriesVideos(seriesId));
+    }, 1000);
   }, [number, num]);
 
-  // if (loading) {
-  //   return <Loader />;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div className="w-full">

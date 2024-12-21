@@ -5,9 +5,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import { FaFacebook, FaTwitter } from "react-icons/fa";
 import { RiInstagramFill } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
+import Loader from "../components/loader/Loader";
 
 const PersonDetails = () => {
-  const { PersonDetails, PersonRecommend } = useSelector(
+  const { PersonDetails, PersonRecommend, loading } = useSelector(
     (state) => state.personDetails
   );
   const dispatch = useDispatch();
@@ -15,10 +16,15 @@ const PersonDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(getPersonDetails(personId));
-    dispatch(getPersonRecommend(personId));
-  }, []);
+    setTimeout(() => {
+      dispatch(getPersonDetails(personId));
+      dispatch(getPersonRecommend(personId));
+    }, []);
+  }, 1000);
 
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div className="w-full">
       <div className="w-full flex flex-col sm:flex-row">
