@@ -5,20 +5,30 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getHomeMovies } from "../redux/Slices/homeMovies";
 import { useNavigate } from "react-router-dom";
+import Loader from "./loader/Loader";
 
 const MovisSlider = () => {
-  const { HomeMovies } = useSelector((state) => state.homeMovies);
+  const { HomeMovies, loading } = useSelector((state) => state.homeMovies);
 
   const dispatch = useDispatch();
   const navigat = useNavigate();
 
   useEffect(() => {
+    // setTimeout(() => {
     dispatch(getHomeMovies());
+    // }, 3000);
   }, []);
+
+  if (loading) {
+    <Loader />;
+  }
 
   var settings = {
     dots: false,
     infinite: false,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    cssEase: "linear",
     speed: 500,
     slidesToShow: 4,
     slidesToScroll: 4,
@@ -52,21 +62,21 @@ const MovisSlider = () => {
   };
 
   return (
-    <div className=" sm:container sm:w-full ">
-      <Slider {...settings}>
-        {HomeMovies?.results.map((mov, i) => (
-          <div
-            key={i}
-            className="p-16 md:p-4 cursor-pointer w-full"
-            onClick={() => navigat(`/movies/${mov.id}`)}
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
-            />
-          </div>
-        ))}
-      </Slider>
-    </div>
+    // <div className="w-full sm:container sm:w-full ">
+    <Slider {...settings}>
+      {HomeMovies?.results.map((mov, i) => (
+        <div
+          key={i}
+          className="p-16 md:p-4 cursor-pointer w-full"
+          onClick={() => navigat(`/movies/${mov.id}`)}
+        >
+          <img
+            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
+          />
+        </div>
+      ))}
+    </Slider>
+    // </div>
   );
 };
 
