@@ -62,21 +62,21 @@ const MovisSlider = () => {
   };
 
   return (
-    // <div className="w-full sm:container sm:w-full ">
-    <Slider {...settings}>
-      {HomeMovies?.results.map((mov, i) => (
-        <div
-          key={i}
-          className="p-16 md:p-4 cursor-pointer w-full"
-          onClick={() => navigat(`/movies/${mov.id}`)}
-        >
-          <img
-            src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
-          />
-        </div>
-      ))}
-    </Slider>
-    // </div>
+    <div className="w-full sm:container sm:w-full ">
+      <Slider {...settings}>
+        {HomeMovies?.results.map((mov, i) => (
+          <div
+            key={i}
+            className="p-16 md:p-4 cursor-pointer w-full"
+            onClick={() => navigat(`/movies/${mov.id}`)}
+          >
+            <img
+              src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
+            />
+          </div>
+        ))}
+      </Slider>
+    </div>
   );
 };
 
