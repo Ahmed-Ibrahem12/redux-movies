@@ -58,8 +58,8 @@ const CastMovie = () => {
           </div>
         </div>
       </div>
-      <div className="w-full flex">
-        <div className="w-1/2 flex flex-col">
+      <div className="w-full flex flex-col sm:flex-row">
+        <div className="sm:w-1/2 flex flex-col">
           <h1 className="text-[2em] mt-5">Cast</h1>
           <div className="mt-4 w-full">
             {MovieCast?.cast?.map((p, i) => (
@@ -85,7 +85,7 @@ const CastMovie = () => {
             ))}
           </div>
         </div>
-        <div className="w-1/2 flex flex-col">
+        <div className="sm:w-1/2 flex flex-col">
           <h1 className="text-[2em] mt-5">Crew</h1>
           <div className="mt-4 w-full">
             <div className="mt-5 mb-5">
