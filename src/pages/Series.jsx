@@ -8,9 +8,12 @@ import {
 import ReactStars from "react-stars";
 import { Button } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import Loader from "../components/loader/Loader";
 
 const Series = () => {
-  const { HomeSeries, number } = useSelector((state) => state.homeSeries);
+  const { HomeSeries, number, loading } = useSelector(
+    (state) => state.homeSeries
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -19,6 +22,10 @@ const Series = () => {
       dispatch(getSeriesHome(number));
     }, 500);
   }, [number]);
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>

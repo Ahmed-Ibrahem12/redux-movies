@@ -216,7 +216,7 @@ const ShowSeries = () => {
         <div className="flex flex-col w-9/12 container items-start">
           <h1 className="mt-5 mb-5 text-[1.4em] font-bold">Top Billed Cast</h1>
           <div className="flex overflow-auto relative flex-nowrap w-full">
-            {SeriesCast?.cast.map((p, i) => (
+            {SeriesCast?.cast.slice(0, 6).map((p, i) => (
               <div key={i} className="text-white">
                 <div className="block max-w-[18rem] ms-3 h-full w-44 rounded-lg bg-gray-800 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white">
                   <div
@@ -235,6 +235,14 @@ const ShowSeries = () => {
                 </div>
               </div>
             ))}
+            <div
+              onClick={() => navigate(`/castserie/${SeriesDetails.id}`)}
+              className="cursor-pointer max-w-[18rem] ms-3 h-[85] flex items-center  rounded-lg bg-gray-800 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
+            >
+              <div className=" w-full">
+                <h3 className="text-[1em] font-bold w-full p-16">Show More</h3>
+              </div>
+            </div>
           </div>
 
           <div className="mt-5 flex flex-col items-start w-full">

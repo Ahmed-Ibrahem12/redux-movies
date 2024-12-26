@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getSeriesHome } from "../redux/Slices/homeSeries";
+import { useNavigate } from "react-router-dom";
 
 const SeriesSlider = () => {
   const { HomeSeries } = useSelector((state) => state.homeSeries);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSeriesHome());
@@ -56,7 +58,11 @@ const SeriesSlider = () => {
     <div className=" sm:container sm:w-full ">
       <Slider {...settings}>
         {HomeSeries?.results.map((ser, i) => (
-          <div key={i} className="p-16 md:p-4">
+          <div
+            key={i}
+            className="p-16 md:p-4 cursor-pointer"
+            onClick={() => navigate(`/series/${ser.id}`)}
+          >
             <img
               src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${ser.poster_path}`}
             />

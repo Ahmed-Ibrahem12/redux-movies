@@ -8,6 +8,8 @@ import Series from "./pages/Series";
 import ShowMovie from "./pages/ShowMovie";
 import ShowSeries from "./pages/ShowSeries";
 import PersonDetails from "./pages/PersonDetails";
+import CastMovie from "./pages/CastMovie";
+import CastSeries from "./pages/CastSeries";
 
 const App = () => {
   return (
@@ -21,6 +23,8 @@ const App = () => {
           <Route path="/movies/:movieId" element={<ShowMovie />} />
           <Route path="/person/:personId" element={<PersonDetails />} />
           <Route path="/series/:seriesId" element={<ShowSeries />} />
+          <Route path="/castmovie/:MovieId" element={<CastMovie />} />
+          <Route path="/castserie/:SeriesId" element={<CastSeries />} />
         </Routes>
         <Footer />
       </div>

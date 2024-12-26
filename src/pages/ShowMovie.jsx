@@ -222,7 +222,7 @@ const ShowMovie = () => {
               Top Billed Cast
             </h1>
             <div className="flex overflow-auto relative flex-nowrap w-full">
-              {MovieCast?.cast.map((p, i) => (
+              {MovieCast?.cast.slice(0, 6).map((p, i) => (
                 <div key={i} className="text-white">
                   <div
                     onClick={() => navigate(`/person/${p.id}`)}
@@ -241,6 +241,16 @@ const ShowMovie = () => {
                   </div>
                 </div>
               ))}
+              <div
+                onClick={() => navigate(`/castmovie/${MovieDetails.id}`)}
+                className="cursor-pointer max-w-[18rem] ms-3 h-[85] flex items-center  rounded-lg bg-gray-800 text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white"
+              >
+                <div className=" w-full">
+                  <h3 className="text-[1em] font-bold w-full p-16">
+                    Show More
+                  </h3>
+                </div>
+              </div>
             </div>
           </div>
 
