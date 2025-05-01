@@ -10,13 +10,20 @@ import ShowSeries from "./pages/ShowSeries";
 import PersonDetails from "./pages/PersonDetails";
 import CastMovie from "./pages/CastMovie";
 import CastSeries from "./pages/CastSeries";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const App = () => {
   useEffect(() => {
     if ("scrollRestoration" in window.history) {
       window.history.scrollRestoration = "manual"; // إيقاف التمرير التلقائي
     }
+    AOS.init({
+      duration: 2000, // مدة الحركة
+      once: true, // الحركة مرة واحدة فقط
+    });
   }, []);
+
   return (
     <div>
       <Header />

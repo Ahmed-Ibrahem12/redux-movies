@@ -27,7 +27,7 @@ export default function TopSeries() {
       {HomeSeries?.results.map(
         (mov, i) =>
           mov.vote_average > 7 && (
-            <Card key={i} className="mt-6 w-96 m-5 mb-7">
+            <Card key={i} className="mt-6 w-96 m-5 mb-7" data-aos="fade-up">
               <CardHeader color="blue-gray" className="relative h-auto">
                 <img
                   src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}

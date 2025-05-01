@@ -62,23 +62,23 @@ const Header = () => {
               <input
                 type="search"
                 className="relative text-white m-0 block sm:w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-white focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
-                placeholder="Search Movies"
-                aria-label="Search"
-                aria-describedby="button-addon2"
-                value={text}
-                onChange={(e) => dispatch(getSearchMovie(text))}
-                onChangeCapture={(e) => SetText(e.target.value)}
-              />
-            ) : (
-              <input
-                type="search"
-                className="relative text-white m-0 block sm:w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-white focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
                 placeholder="Search Series"
                 aria-label="Search"
                 aria-describedby="button-addon2"
                 value={text2}
                 onChange={(e) => dispatch(getSearchSeries(text2))}
                 onChangeCapture={(e) => SetText2(e.target.value)}
+              />
+            ) : (
+              <input
+                type="search"
+                className="relative text-white m-0 block sm:w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-white focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
+                placeholder="Search Movies"
+                aria-label="Search"
+                aria-describedby="button-addon2"
+                value={text}
+                onChange={(e) => dispatch(getSearchMovie(text))}
+                onChangeCapture={(e) => SetText(e.target.value)}
               />
             )}
             <Button
