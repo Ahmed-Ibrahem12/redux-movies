@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect, useLayoutEffect } from "react";
+import { Routes, Route, ScrollRestoration } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
@@ -12,10 +12,16 @@ import CastMovie from "./pages/CastMovie";
 import CastSeries from "./pages/CastSeries";
 
 const App = () => {
+  useEffect(() => {
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual"; // إيقاف التمرير التلقائي
+    }
+  }, []);
   return (
     <div>
       <Header />
       <div className="text-center flex justify-center items-center flex-col  bg-black text-white">
+        {/* <ScrollRestoration> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
@@ -26,6 +32,7 @@ const App = () => {
           <Route path="/castmovie/:MovieId" element={<CastMovie />} />
           <Route path="/castserie/:SeriesId" element={<CastSeries />} />
         </Routes>
+        {/* </ScrollRestoration> */}
         <Footer />
       </div>
     </div>
