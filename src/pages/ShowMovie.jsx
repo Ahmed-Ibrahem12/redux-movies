@@ -78,6 +78,7 @@ const ShowMovie = () => {
             <div className="w-1/2 sm:w-1/4 h-full ">
               <img
                 src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${MovieDetails?.poster_path}`}
+                loading="lazy"
               />
             </div>
             <div className="w-3/5 flex flex-col  sm:items-start">

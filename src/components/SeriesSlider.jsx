@@ -1,74 +1,60 @@
 import React, { useEffect } from "react";
-import Slider from "react-slick";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/navigation";
+import { Autoplay, Navigation } from "swiper/modules";
 import { useDispatch, useSelector } from "react-redux";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { getSeriesHome } from "../redux/Slices/homeSeries";
 import { useNavigate } from "react-router-dom";
+import Loader from "./loader/Loader";
 
 const SeriesSlider = () => {
-  const { HomeSeries } = useSelector((state) => state.homeSeries);
-
+  const { HomeSeries, loading } = useSelector((state) => state.homeSeries);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getSeriesHome());
-  }, []);
+  }, [dispatch]);
 
-  var settings = {
-    dots: false,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-    initialSlide: 0,
-    autoplay: true,
-    autoplaySpeed: 2000,
-    cssEase: "linear",
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false,
-        },
-      },
-      {
-        breakpoint: 600,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
+  if (loading) return <Loader />;
 
   return (
-    <div className=" sm:container sm:w-full ">
-      <Slider {...settings}>
-        {HomeSeries?.results.map((ser, i) => (
-          <div
-            key={i}
-            className="p-16 md:p-4 cursor-pointer"
-            onClick={() => navigate(`/series/${ser.id}`)}
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${ser.poster_path}`}
-            />
-          </div>
+    <div className="w-full sm:container px-4 py-6">
+      <Swiper
+        modules={[Autoplay, Navigation]}
+        // navigation
+        autoplay={{
+          delay: 2000,
+          disableOnInteraction: false,
+        }}
+        loop={false}
+        speed={800}
+        spaceBetween={20}
+        breakpoints={{
+          320: { slidesPerView: 1 },
+          640: { slidesPerView: 2 },
+          1024: { slidesPerView: 3 },
+          1280: { slidesPerView: 4 },
+        }}
+        className="mySwiper"
+      >
+        {HomeSeries?.results?.map((ser, i) => (
+          <SwiperSlide key={i}>
+            <div
+              className="cursor-pointer transition-transform duration-300 hover:scale-105"
+              onClick={() => navigate(`/series/${ser.id}`)}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${ser.poster_path}`}
+                alt={ser.name || "Series Poster"}
+                className="rounded-lg shadow-lg w-full h-auto"
+              />
+            </div>
+          </SwiperSlide>
         ))}
-      </Slider>
+      </Swiper>
     </div>
   );
 };

@@ -12,7 +12,7 @@ import Footer from "./../components/Footer";
 const Home = () => {
   return (
     <div className="text-center bg-black text-white flex justify-center w-full items-center flex-col ">
-      <div className="flex justify-around w-full mt-5 mb-5 flex-col ">
+      {/* <div className="flex justify-around w-full mt-5 mb-5 flex-col ">
         <div className="w-full">
           <h1 className="text-[1.3em] mt-3">Sort By</h1>
           <div className=" flex justify-evenly mt-4 mb-4">
@@ -29,26 +29,28 @@ const Home = () => {
             <Button variant="gradient">Ascending</Button>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="flex flex-col w-full justify-center items-center">
-        <h1 className=" text-red-700 text-[2em] font-bold mb-5">Movies</h1>
-        <div className="w-full container">
+      <div className="flex flex-col w-full justify-center items-center mt-7">
+        <h1 className=" text-blue-700 text-[3em] font-bold mb-5 font-sans">
+          Movies
+        </h1>
+        <div className="w-full container p-4">
           <MovisSlider />
         </div>
-        <h1 className=" text-red-700 text-[2em] font-bold mt-5 mb-5">Series</h1>
-        <div className="w-full container">
+        <h1 className=" text-red-700 text-[3em] font-bold mt-5 mb-5">Series</h1>
+        <div className="w-full container p-4">
           <SeriesSlider />
         </div>
       </div>
       <div className="flex flex-col text-center">
-        <h1 className=" text-red-700 text-[2em] font-bold mt-7 mb-7">
+        <h1 className=" text-blue-700 text-[3em] font-bold mt-7 mb-7">
           Top Movies
         </h1>
         <TopMovies />
       </div>
       <div className="flex flex-col text-center">
-        <h1 className=" text-red-700 text-[2em] font-bold mt-7 mb-7">
+        <h1 className=" text-red-700 text-[3em] font-bold mt-7 mb-7">
           Top Series
         </h1>
         <TopSeries />
