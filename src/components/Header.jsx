@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   changeBtn,
-  changeNum,
   getSearchMovie,
   getSearchSeries,
 } from "../redux/Slices/movieSearch";
@@ -19,12 +18,13 @@ const Header = () => {
     (state) => state.movieSearch
   );
 
+  // تحميل بيانات فاضية عند أول تشغيل
   useEffect(() => {
     dispatch(getSearchMovie(""));
     dispatch(getSearchSeries(""));
   }, [dispatch]);
 
-  // handle search movie
+  // البحث عن الأفلام
   useEffect(() => {
     if (!change && text.trim() !== "") {
       const timer = setTimeout(() => {
@@ -34,7 +34,7 @@ const Header = () => {
     }
   }, [text, change, dispatch]);
 
-  // handle search series
+  // البحث عن المسلسلات
   useEffect(() => {
     if (change && text2.trim() !== "") {
       const timer = setTimeout(() => {
@@ -45,16 +45,18 @@ const Header = () => {
   }, [text2, change, dispatch]);
 
   return (
-    <div className="sticky top-0 z-20">
-      <nav className="relative bg-gray-900 flex w-full flex-wrap items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4">
+    <div className="sticky top-0 z-50">
+      <nav className="relative bg-gray-900 flex w-full flex-wrap items-center justify-between py-2 lg:py-4 shadow-md">
         <div className="flex w-full flex-wrap items-center justify-between px-3">
+          {/* Logo + Buttons */}
           <div className="flex w-full sm:w-auto justify-between items-center">
             <span
-              className="ms-2 text-xl text-white dark:text-white cursor-pointer"
+              className="ms-2 text-xl text-white cursor-pointer"
               onClick={() => navigate("/")}
             >
               Ody Movies
             </span>
+
             <div className="flex">
               <motion.div whileTap={{ scale: 0.9 }}>
                 <Button
@@ -77,11 +79,12 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="sm:ms-5 flex sm:w-[30%] w-full items-center justify-between mt-2">
+          {/* Search */}
+          <div className="sm:ms-5 flex sm:w-[30%] w-full items-center justify-between mt-2 relative">
             {change ? (
               <input
                 type="search"
-                className="relative text-white m-0 block sm:w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-white focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
+                className="relative text-white m-0 block sm:w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-secondary-500 bg-transparent px-3 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:border-primary focus:text-white focus:shadow-inset focus:outline-none dark:border-white/10"
                 placeholder="Search Series"
                 aria-label="Search"
                 value={text2}
@@ -90,7 +93,7 @@ const Header = () => {
             ) : (
               <input
                 type="search"
-                className="relative text-white m-0 block sm:w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-secondary-500 bg-transparent bg-clip-padding px-3 py-1.5 text-base font-normal text-surface transition duration-300 ease-in-out focus:border-primary focus:text-white focus:shadow-inset focus:outline-none motion-reduce:transition-none dark:border-white/10 dark:bg-body-dark dark:text-white dark:placeholder:text-neutral-300 dark:autofill:shadow-autofill"
+                className="relative text-white m-0 block sm:w-[1px] min-w-0 flex-auto rounded-lg border border-solid border-secondary-500 bg-transparent px-3 py-1.5 text-base font-normal transition duration-300 ease-in-out focus:border-primary focus:text-white focus:shadow-inset focus:outline-none dark:border-white/10"
                 placeholder="Search Movies"
                 aria-label="Search"
                 value={text}
@@ -121,58 +124,50 @@ const Header = () => {
       </nav>
 
       {/* Movies Results */}
-      <div
-        className={
-          text.trim() === ""
-            ? "z-0 h-0 w-0"
-            : "absolute bg-gray-900 flex rounded text-white sm:right-2 w-full sm:w-[30%] h-96 z-20 flex flex-col overflow-auto"
-        }
-      >
-        {SearchMovie?.results?.map((mov, i) => (
-          <div
-            key={i}
-            className="flex p-2 items-center z-30 text-white hover:bg-gray-700 rounded cursor-pointer"
-            onClick={() => {
-              navigate(`/movies/${mov.id}`);
-              setText("");
-            }}
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
-              className="rounded-[50%] me-2"
-              width={30}
-            />
-            <h4>{mov.title}</h4>
-          </div>
-        ))}
-      </div>
+      {!change && text.trim() !== "" && (
+        <div className="absolute bg-gray-900 flex rounded text-white sm:right-2 w-full sm:w-[30%] h-96 z-40 flex-col overflow-auto">
+          {SearchMovie?.results?.map((mov, i) => (
+            <div
+              key={i}
+              className="flex p-2 items-center hover:bg-gray-700 rounded cursor-pointer"
+              onClick={() => {
+                navigate(`/movies/${mov.id}`);
+                setText("");
+              }}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
+                className="rounded-[50%] me-2"
+                width={30}
+              />
+              <h4>{mov.title}</h4>
+            </div>
+          ))}
+        </div>
+      )}
 
       {/* Series Results */}
-      <div
-        className={
-          text2.trim() === ""
-            ? "z-0 h-0 w-0"
-            : "absolute bg-gray-900 flex text-white sm:right-2 w-full sm:w-[30%] h-96 z-20 flex flex-col overflow-auto rounded"
-        }
-      >
-        {SearchSeries?.results?.map((mov, i) => (
-          <div
-            key={i}
-            className="flex p-2 items-center z-30 text-white hover:bg-gray-700 rounded cursor-pointer"
-            onClick={() => {
-              navigate(`/series/${mov.id}`);
-              setText2("");
-            }}
-          >
-            <img
-              src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
-              className="rounded-[50%] me-2"
-              width={30}
-            />
-            <h4>{mov.name}</h4>
-          </div>
-        ))}
-      </div>
+      {change && text2.trim() !== "" && (
+        <div className="absolute bg-gray-900 flex text-white sm:right-2 w-full sm:w-[30%] h-96 z-40 flex-col overflow-auto rounded">
+          {SearchSeries?.results?.map((mov, i) => (
+            <div
+              key={i}
+              className="flex p-2 items-center hover:bg-gray-700 rounded cursor-pointer"
+              onClick={() => {
+                navigate(`/series/${mov.id}`);
+                setText2("");
+              }}
+            >
+              <img
+                src={`https://image.tmdb.org/t/p/w600_and_h900_bestv2${mov.poster_path}`}
+                className="rounded-[50%] me-2"
+                width={30}
+              />
+              <h4>{mov.name}</h4>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
