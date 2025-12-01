@@ -11,49 +11,37 @@ import Footer from "./../components/Footer";
 
 const Home = () => {
   return (
-    <div className="text-center bg-black text-white flex justify-center w-full items-center flex-col ">
-      {/* <div className="flex justify-around w-full mt-5 mb-5 flex-col ">
-        <div className="w-full">
-          <h1 className="text-[1.3em] mt-3">Sort By</h1>
-          <div className=" flex justify-evenly mt-4 mb-4">
-            <Button variant="gradient">Title</Button>
-            <Button variant="gradient">Date</Button>
-            <Button variant="gradient">Poplirty</Button>
-            <Button variant="gradient">Rate</Button>
-          </div>
-        </div>
-        <div className="w-full">
-          <h1 className="text-[1.3em] mt-3">Sort Order</h1>
-          <div className=" flex justify-evenly mt-4 mb-4">
-            <Button variant="gradient">Descingin</Button>
-            <Button variant="gradient">Ascending</Button>
-          </div>
-        </div>
-      </div> */}
-
+    <div className="text-center bg-black text-white flex justify-center w-full items-center flex-col overflow-x-hidden overflow-y-hidden">
       <div className="flex flex-col w-full justify-center items-center mt-7">
         <h1 className=" text-blue-700 text-[3em] font-bold mb-5 font-sans">
           Movies
         </h1>
-        <div className="w-full container p-4">
+        <div className="w-full container p-4 overflow-hidden">
           <MovisSlider />
         </div>
+
         <h1 className=" text-red-700 text-[3em] font-bold mt-5 mb-5">Series</h1>
-        <div className="w-full container p-4">
+        <div className="w-full container p-4 overflow-hidden">
           <SeriesSlider />
         </div>
       </div>
+
       <div className="flex flex-col text-center">
         <h1 className=" text-blue-700 text-[3em] font-bold mt-7 mb-7">
           Top Movies
         </h1>
-        <TopMovies />
+        <div className="overflow-hidden">
+          <TopMovies />
+        </div>
       </div>
-      <div className="flex flex-col text-center">
+
+      <div className="flex flex-col text-center mb-10">
         <h1 className=" text-red-700 text-[3em] font-bold mt-7 mb-7">
           Top Series
         </h1>
-        <TopSeries />
+        <div className="overflow-hidden">
+          <TopSeries />
+        </div>
       </div>
     </div>
   );
